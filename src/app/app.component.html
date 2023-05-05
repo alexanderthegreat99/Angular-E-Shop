@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet">
 <mat-toolbar class="toolbar">
-  Angular Chat-App with Firebase  
+  Angular E-Shop with Firebase  
   <ng-container *ngIf="user$| async as user; else loginButton">
      
     <button mat-button class="profile-button" [matMenuTriggerFor]="userMenu">
@@ -31,6 +31,14 @@
    <button mat-menu-item routerLink="/home">
     <mat-icon>chat</mat-icon>
    Chat With Users
+   </button>
+   <button mat-menu-item routerLink="/post-products">
+    <mat-icon>note_alt</mat-icon>
+   Post New Product Listing
+   </button>
+   <button mat-menu-item routerLink="/products">
+    <mat-icon>local_offer</mat-icon>
+   Browse Products
    </button>
    <button mat-menu-item (click)="logout()">
    <mat-icon>logout</mat-icon>

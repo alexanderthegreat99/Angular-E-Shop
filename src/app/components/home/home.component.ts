@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 //import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -18,7 +18,7 @@ import { ProfileUser } from 'src/app/models/user';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   @ViewChild('endOfChat') endOfChat!: ElementRef;
 //user$ = this.authService.currentUser$;
   user$ = this.usersService.currentUserProfile$;
@@ -32,6 +32,7 @@ export class HomeComponent {
    );
   
     myChats$ = this.chatsService.myChats$;
+    
     // selectedChat$ = combineLatest([
     //   this.chatListControl.valueChanges,
     //   this.myChats$,
@@ -42,7 +43,7 @@ export class HomeComponent {
       this.chatListControl.valueChanges,
       this.myChats$,
     ]).pipe(
-      tap(([value, chats]) => console.log('Selected chat:', value)),
+      tap(([value]) => console.log('Selected chat:', value)),
       map(([value, chats]) => chats.find((c) => c.id === value[0]))
     );
 
@@ -62,6 +63,9 @@ export class HomeComponent {
   // createChat(otherUser:ProfileUser){
   //   this.chatsService.createChat(otherUser).subscribe();
   // }
+  ngOnInit(){
+    this.chatsService.myChats$.subscribe(chats => console.log("chats: ", JSON.stringify(chats)));
+  }
   createChat(otherUser:ProfileUser){
        this.chatsService.isExistingChat(otherUser.uid).pipe(
         switchMap(chatId => {

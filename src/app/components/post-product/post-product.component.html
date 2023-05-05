@@ -1,0 +1,60 @@
+<p>post-product works!</p>
+<h1 style="text-align: center">This is Darren Perez's website</h1>
+<div class="form-container mat-elevation-z5 text-center" style="text-align: center" class="form-container mat-elevation-z5 text-center"
+*ngIf="user$ | async as user">
+    <!-- <h1>Update {{user.displayName ? user.displayName : user.email }}'s Profile</h1> -->
+    <h1>Add New Product Listing</h1>
+    <form class="margin-top" [formGroup]="productForm" (ngSubmit)="createProducts()">
+    <div class="profile-image"  style="display: flex; justify-content: center; align-items: center; flex-basis: 80px; overflow: hidden;">
+        <img
+          
+          class="margin-top mat-elevation-z1"
+          [src]="productForm.get('photoURL')?.value || '/assets/images/tshirtproduct.png'"
+          
+        />
+       <button mat-mini-fab  #editButton (click)="inputField.click()">
+            <mat-icon>edit</mat-icon>
+       </button>
+      </div>
+      <input #inputField type="file"  hidden (change)="uploadImage($event, user)">
+      <input type="text" formControlName="photoURL" >
+
+        
+        <div class="row">
+          <mat-form-field>
+            <input
+              type="text"
+              matInput
+              formControlName="productName"
+              placeholder="Product Name"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              type="text"
+              matInput
+              formControlName="price"
+              placeholder="Product Price"
+            />
+          </mat-form-field>
+        </div>
+    
+        <div>
+          <mat-form-field>
+            <input
+              type="text"
+              matInput
+              formControlName="condition"
+              placeholder="Product Conditon (new/used)"
+            />
+          </mat-form-field>
+          
+        </div>
+        
+    
+        <button type="submit" class="margin-top save-button" mat-raised-button color="primary">
+          Save
+        </button>
+        
+      </form>
+</div>

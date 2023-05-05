@@ -1,0 +1,21 @@
+
+<div class="products-container" *ngIf="(allProducts) as products">
+    <div *ngFor="let p of products">
+            <div class="product-container">
+            <div class="image-container"><img [src]="p.photoURL" alt="" style="max-height: 80px; max-width: auto"></div>
+            <div>
+                <div class="name-container"><h6></h6></div>
+                <div class="detailContainer">
+                    <div class="details"><b>Product Name: </b>{{ p.productName }}</div>
+                    <div class="details"><b>Price: </b>{{ p.price }}</div>
+                    <div class="details"><b>Condition: </b>{{ p.condition }}</div>
+                </div>
+            </div>
+            <div class="product-buttons">
+                <button class="btn-primary"> add to cart</button>
+                <button class="darkblue btn-primary">message user</button>
+            </div>
+            
+        </div>
+    </div>
+</div>

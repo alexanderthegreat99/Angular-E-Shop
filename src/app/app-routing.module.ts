@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router'
 import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component'
-import { HomeComponent } from './components/home/home.component'
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PostProductComponent } from './components/post-product/post-product.component';
+import { ProductsComponent } from './components/products/products.component';
 import {
   canActivate,
   redirectLoggedInTo,
@@ -39,7 +41,16 @@ const routes: Routes = [
     component: ProfileComponent,
     ...canActivate(redirectUnauthorizedToLogin),
   },
-  
+  {
+    path: 'post-products',
+    component: PostProductComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'products',
+    component: ProductsComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
 ];
 
 @NgModule({

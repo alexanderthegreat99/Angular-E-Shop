@@ -49,10 +49,19 @@ export class ChatsService {
       concatMap((user)=> {
         const myQuery = query(ref, where('userIds', 'array-contains', user?.uid))
         return collectionData(myQuery, {idField: 'id'}).pipe(
-          map(chats => this.addChatNameAndPic(user?.uid ?? '', chats as Chat[]))
+          map(chats => this.addChatNameAndPic(user?.uid ?? '', chats as Chat[]) )
         ) as Observable<Chat[]>
       })
     )
+  }
+  addChatNameAndPic(currentUserId: string, chats: Chat[]): Chat[] {
+    chats.forEach(chat => {
+      const otherUserIndex = chat.userIds.indexOf(currentUserId) === 0 ? 1 : 0 
+      const { displayName, photoURL } = chat.users[otherUserIndex];
+        chat.chatName = displayName;
+        chat.chatPic = photoURL;
+    })
+    return chats;
   }
   isExistingChat(otherUserId: string): Observable<string | null>{
     return this.myChats$.pipe(
@@ -93,13 +102,5 @@ export class ChatsService {
     return collectionData(queryAll) as Observable<Message[]>
   }
 
-  addChatNameAndPic(currentUserId: string, chats: Chat[]): Chat[] {
-  chats.forEach(chat => {
-    const otherUserIndex = chat.userIds.indexOf(currentUserId) === 0 ? 1 : 0 
-    const { displayName, photoURL } = chat.users[otherUserIndex];
-      chat.chatName = displayName;
-      chat.chatPic = photoURL;
-  })
-  return chats;
-}
+  
  }

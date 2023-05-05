@@ -35,6 +35,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { DateDisplayPipe } from './pipes/date-display.pipe';
 import { DatePipe } from '@angular/common';
+import { PostProductComponent } from './components/post-product/post-product.component';
+import { ProductsComponent } from './components/products/products.component';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import { DatePipe } from '@angular/common';
     SignUpComponent,
     ProfileComponent,
     DateDisplayPipe,
+    PostProductComponent,
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,
