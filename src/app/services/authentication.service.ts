@@ -10,6 +10,9 @@ import {
   UserCredential,
 } from '@angular/fire/auth';
 import { concatMap, from, Observable, of, switchMap } from 'rxjs';
+import { UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+
+@UntilDestroy()
 @Injectable({
   providedIn: 'root'
 })
@@ -17,8 +20,8 @@ export class AuthenticationService {
   
   currentUser$ = authState(this.auth);
   constructor(private auth: Auth) { 
-    authState(this.auth).subscribe((response)=>{
-      console.log("auth: "+response);
+    authState(this.auth).pipe(untilDestroyed(this)).subscribe((response)=>{
+     // console.log("auth: "+response);
     });
   }
   

@@ -1,6 +1,6 @@
 
 <div class="products-container" *ngIf="(allProducts) as products">
-    <div *ngFor="let p of products">
+    <div *ngFor="let p of products  | paginate: { itemsPerPage: 8, currentPage: p }">
             <div class="product-container">
             <div class="image-container"><img [src]="p.photoURL" alt="" style="max-height: 80px; max-width: auto"></div>
             <div>
@@ -13,9 +13,19 @@
             </div>
             <div class="product-buttons">
                 <button class="btn-primary"> add to cart</button>
-                <button class="darkblue btn-primary">message user</button>
+                <div  *ngIf="user$ | async as currentUser">
+                <button class="darkblue btn-primary" *ngIf="currentUser.uid != p.userIds; else notifyme" (click)="messageSeller(p.userIds)">message user</button>
+                <ng-template #notifyme>
+                    <button class="darkRed btn-primary" (click)="quickEditProduct(p)">Edit My Product</button>
+                </ng-template>
+            </div>
             </div>
             
         </div>
     </div>
 </div>
+<div class="parent-container ">
+    <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+  </div>
+
+  <!-- *ngIf="currentUser.uid != p.userIds; else notifyme" -->

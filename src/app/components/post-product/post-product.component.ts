@@ -14,6 +14,10 @@ import { concatMap, switchMap, of, Observable} from 'rxjs';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators} from '@angular/forms';
 import { ProfileUser } from 'src/app/models/user';
 import { Product } from 'src/app/models/product';
+import { UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+
+@UntilDestroy()
+
 
 @Component({
   selector: 'app-post-product',
@@ -44,7 +48,7 @@ export class PostProductComponent {
   ngOnInit(): void {
     this.usersService.currentUserProfile$
    // .pipe(untilDestroyed(this))
-    .subscribe((user) => {
+    .pipe(untilDestroyed(this)).subscribe((user) => {
       //this.profileForm.patchValue({ ...user});
     })
   }
@@ -84,7 +88,7 @@ export class PostProductComponent {
       return;
     }
     
-    this.productsService.createProduct({photoURL,productName, price, condition }).subscribe(() => {
+    this.productsService.createProduct({photoURL,productName, price, condition }).pipe(untilDestroyed(this)).subscribe(() => {
       
       this.toast.success({detail:"SUCCESS",summary:'You Sucessfully Added a Product!', duration: 5000});
       console.log(this.productForm.value);
@@ -125,7 +129,7 @@ export class PostProductComponent {
     const timestamp = new Date().getTime();
     const fileName = `images/products/${uid}/${timestamp}_${event.target.files[0].name}`;
     
-    this.imageUploadService.uploadImage(event.target.files[0], fileName)
+    this.imageUploadService.uploadImage(event.target.files[0], fileName).pipe(untilDestroyed(this))
       .subscribe((photoURL) => {
         console.log(photoURL);
         this.productForm.patchValue({
@@ -155,7 +159,7 @@ export class PostProductComponent {
     
     this.imageUploadService.uploadImage(event.target.files[0],`images/profile/${uid}`).pipe(
      // concatMap((photoURL) => this.usersService.updateUser({ uid: user.uid, photoURL}))
-     
+     (untilDestroyed(this)),
      switchMap((photoURL) =>
             this.usersService.updateUser({
               uid,

@@ -8,11 +8,13 @@ import {
   setDoc,
   updateDoc,
   collectionData,
-  query
+  query,
+  where
 } from '@angular/fire/firestore';
 import { filter, from, map, Observable, of, switchMap } from 'rxjs';
 import { ProfileUser } from '../models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +40,43 @@ export class UsersService {
       const queryAll = query(ref);
       return collectionData(queryAll) as Observable<ProfileUser[]>;
     }
+    get specificUser$(): Observable<ProfileUser[]>{
+      const ref = collection(this.firestore, 'users');
+      const querys = query(ref, where('uid', '==', 'tW0hge0j6XfGQnSQeW2Kz1eKpxB3') );
+    
+      return collectionData(querys, { idField: 'id' }).pipe(
+        map(users =>  users as ProfileUser[])
+      ) as Observable<ProfileUser[]> 
+    }
+    getSpecificUser$(uid: string | undefined): Observable<ProfileUser[]> {
+      const ref = collection(this.firestore, 'users');
+      const querys = query(ref, where('uid', '==', uid));
+    
+      return collectionData(querys, { idField: 'id' }).pipe(
+        map(users =>  users as ProfileUser[])
+      ) as Observable<ProfileUser[]>
+    }
+    get specificProducts$(): Observable<Product[]>{
+      const ref = collection(this.firestore, 'products');
+      const querys = query(ref, where('userIds', 'array-contains', 'tW0hge0j6XfGQnSQeW2Kz1eKpxB3'));
+    
+      return collectionData(querys, { idField: 'id' }).pipe(
+        map(products =>  products as Product[])
+      ) as Observable<Product[]> 
+    }
+    testAllUsers$(): Observable<ProfileUser[]>{
+      const ref = collection(this.firestore, 'users');
+      const queryAll = query(ref);
+      return collectionData(queryAll) as Observable<ProfileUser[]>;
+    }
+    // get specificProducts$(): Observable<Product[]>{
+    //   const ref = collection(this.firestore, 'products');
+    //   const querys = query(ref, where('userIds', 'array-contains', 'tW0hge0j6XfGQnSQeW2Kz1eKpxB3'));
+    
+    //   return collectionData(querys, { idField: 'id' }).pipe(
+    //     map(products =>  products as Product[])
+    //   ) as Observable<Product[]> 
+    // }
   constructor(private firestore: Firestore,  private authService: AuthenticationService,) {}
 
  

@@ -1,0 +1,11 @@
+.container {
+    width: 430px; /* adjust the width as needed */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: relative; /* make the position relative for absolute positioning of maticon */
+    
+  }

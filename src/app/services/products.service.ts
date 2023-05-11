@@ -4,17 +4,20 @@ import {
   collection,
   collectionData,
   Firestore,
+  where,
+  query
   
 } from '@angular/fire/firestore';
 
 import { UsersService } from './users.service';
-import { concatMap, map, Observable, take, from, switchMap } from 'rxjs';
+import { concatMap, map, Observable, take, from, switchMap, BehaviorSubject } from 'rxjs';
 import { Product } from '../models/product';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
+  private p = new BehaviorSubject<number>(1);
   constructor(private firestore: Firestore, private usersService: UsersService) { }
   // createProduct(product: Product): Observable<string>{
   //   const ref = collection(this.firestore, 'products');
@@ -49,6 +52,14 @@ get allProducts$(): Observable<Product[]>{
     map(products =>  products as Product[])
   ) as Observable<Product[]> 
 
+}
+get specificProducts$(): Observable<Product[]>{
+  const ref = collection(this.firestore, 'products');
+  const querys = query(ref, where('userIds', 'array-contains', 'tW0hge0j6XfGQnSQeW2Kz1eKpxB3'));
+
+  return collectionData(querys, { idField: 'id' }).pipe(
+    map(products =>  products as Product[])
+  ) as Observable<Product[]> 
 }
 
 // allProducts$: Observable<Product[]> = this.auth.user.pipe(
@@ -102,5 +113,8 @@ get allProducts$(): Observable<Product[]>{
       }),
       map(ref => ref.id)
     );
+  }
+  updateP(newValue: number) {
+    this.p.next(newValue);
   }
 }

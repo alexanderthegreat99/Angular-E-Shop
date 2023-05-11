@@ -1,0 +1,11 @@
+
+<div class="container">
+    <h1>hi</h1>
+    <div *ngIf="myProduct">
+        <img [src]="myProduct.photoURL" style="max-height: 80px; max-width: auto">
+        <p>{{myProduct.userIds}}</p>
+        <p>{{myProduct.productName}}</p>
+        <p>{{myProduct.price}}</p>
+        <p>{{myProduct.condition}}</p>
+    </div>
+</div>

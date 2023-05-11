@@ -1,0 +1,46 @@
+.container {
+    width: 430px; /* adjust the width as needed */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: relative; /* make the position relative for absolute positioning of maticon */
+    
+  }
+  
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  .header h2 {
+    font-size: 3em; /* increase the font size to 3 times */
+  }
+  
+  button[mat-icon-button] {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  .mat-dialog-actions {
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: -10px;
+   
+  }
+ textarea {
+    
+    width: 100%; /* increase the width to cover more of the dialog */
+    height: 200px;
+    font-size: 1.5em; /* increase the font size to make it larger */
+    padding: 20px; /* add some padding to create some space around the input */
+    margin: 20px 0; /* add some margin to separate it from the header and the actions */
+    box-sizing: border-box; /* include padding in the input's width */
+  }

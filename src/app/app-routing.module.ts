@@ -32,6 +32,11 @@ const routes: Routes = [
     ...canActivate(redirectLoggedInToHome),
   },
   {
+    path: 'landing',
+    component: LandingComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
     path: 'home',
     component: HomeComponent,
     ...canActivate(redirectUnauthorizedToLogin),

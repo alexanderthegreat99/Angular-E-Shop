@@ -20,9 +20,9 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 //import { HotToastModule } from '@ngneat/hot-toast';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+//import { AuthenticationService } from 'src/app/services/authentication.service';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import { Auth } from '@angular/fire/auth';
+//import { Auth } from '@angular/fire/auth';
 //import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import {NgToastModule} from 'ng-angular-popup';
@@ -37,6 +37,10 @@ import { DateDisplayPipe } from './pipes/date-display.pipe';
 import { DatePipe } from '@angular/common';
 import { PostProductComponent } from './components/post-product/post-product.component';
 import { ProductsComponent } from './components/products/products.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatDialogModule } from '@angular/material/dialog';
+import { QuickMessageComponent } from './dialogs/quick-message/quick-message.component';
+import { QuickEditProductComponent } from './dialogs/quick-edit-product/quick-edit-product.component';
 
 
 @NgModule({
@@ -50,6 +54,8 @@ import { ProductsComponent } from './components/products/products.component';
     DateDisplayPipe,
     PostProductComponent,
     ProductsComponent,
+    QuickMessageComponent,
+    QuickEditProductComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +80,8 @@ import { ProductsComponent } from './components/products/products.component';
     MatAutocompleteModule,
     MatListModule,
     MatDividerModule,
-    
+    NgxPaginationModule,
+    MatDialogModule,
    
   ],
   providers: [

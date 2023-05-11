@@ -50,3 +50,12 @@
     margin-left: 5px;
     margin-top: 7px;
   }
+  .darkRed {
+    background-color: rgb(217, 29, 29)!important;
+    margin-left: 5px;
+    margin-top: 7px;
+  }
+.parent-container {
+    display: flex;
+    justify-content: center;
+}

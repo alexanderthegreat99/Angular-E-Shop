@@ -11,8 +11,13 @@ import {
   startWith,
   switchMap,
   tap,
+  Subscription,
+  
 } from 'rxjs';
 import { ProfileUser } from 'src/app/models/user';
+import { UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+
+@UntilDestroy()
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,6 +25,7 @@ import { ProfileUser } from 'src/app/models/user';
 })
 export class HomeComponent implements OnInit{
   @ViewChild('endOfChat') endOfChat!: ElementRef;
+  private allUsersSubscription: Subscription | undefined;
 //user$ = this.authService.currentUser$;
   user$ = this.usersService.currentUserProfile$;
   searchControl = new FormControl('');
@@ -64,10 +70,12 @@ export class HomeComponent implements OnInit{
   //   this.chatsService.createChat(otherUser).subscribe();
   // }
   ngOnInit(){
-    this.chatsService.myChats$.subscribe(chats => console.log("chats: ", JSON.stringify(chats)));
+    //this.chatsService.myChats$.subscribe(chats => console.log("chats: ", JSON.stringify(chats)));
+   // this.allUsersSubscription = this.usersService.allUsers$.subscribe(users => console.log("users test: ", (users)));
   }
   createChat(otherUser:ProfileUser){
        this.chatsService.isExistingChat(otherUser.uid).pipe(
+        untilDestroyed(this),
         switchMap(chatId => {
           if (chatId){
             return of(chatId);
@@ -79,12 +87,14 @@ export class HomeComponent implements OnInit{
         this.chatListControl.setValue([chatId]);
        })
     }
+    
   sendMessage(){
     const message = this.messageControl.value;
     const selectedChatId =this.chatListControl.value[0];
     
     if (message && selectedChatId){
-      this.chatsService.addChatMessage(selectedChatId, message).subscribe(
+      this.chatsService.addChatMessage(selectedChatId, message).pipe(
+        untilDestroyed(this)).subscribe(
         () => {
           this.scrollToBottom();
         }
@@ -99,4 +109,9 @@ export class HomeComponent implements OnInit{
       }
     }, 100);
   }
+  // ngOnDestroy() {
+  //   if (this.allUsersSubscription) {
+  //     this.allUsersSubscription.unsubscribe();
+  //   }
+ // }
 }
