@@ -88,7 +88,7 @@ export class PostProductComponent {
       return;
     }
     
-    this.productsService.createProduct({photoURL,productName, price, condition }).pipe(untilDestroyed(this)).subscribe(() => {
+    this.productsService.createProduct({productId: '', photoURL,productName, price, condition }).pipe(untilDestroyed(this)).subscribe(() => {
       
       this.toast.success({detail:"SUCCESS",summary:'You Sucessfully Added a Product!', duration: 5000});
       console.log(this.productForm.value);

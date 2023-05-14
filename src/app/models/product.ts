@@ -5,7 +5,7 @@
 //     condition: string;
 //   }
 export interface Product {
-  id?: string;
+  productId: string;
   photoURL: string;
   productName: string;
   price: string;

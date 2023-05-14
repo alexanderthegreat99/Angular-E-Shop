@@ -50,8 +50,9 @@ export class UsersService {
     }
     getSpecificUser$(uid: string | undefined): Observable<ProfileUser[]> {
       const ref = collection(this.firestore, 'users');
+    //  const docRef = doc(ref, uid);
       const querys = query(ref, where('uid', '==', uid));
-    
+    //  console.log("usersdocRef.id: ",docRef.id)
       return collectionData(querys, { idField: 'id' }).pipe(
         map(users =>  users as ProfileUser[])
       ) as Observable<ProfileUser[]>

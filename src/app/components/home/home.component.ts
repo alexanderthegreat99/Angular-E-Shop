@@ -37,8 +37,9 @@ export class HomeComponent implements OnInit{
     })
    );
   
-    myChats$ = this.chatsService.myChats$;
-    
+   //myChats$ = this.chatsService.myChats$;
+   myChats$ = this.chatsService.myChatsDesc$;
+   
     // selectedChat$ = combineLatest([
     //   this.chatListControl.valueChanges,
     //   this.myChats$,

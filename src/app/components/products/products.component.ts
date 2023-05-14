@@ -52,7 +52,7 @@ export class ProductsComponent {
   }
   quickEditProduct(myProduct: Product | undefined){
     if (myProduct) {
-      console.log(`Editing Product with ID ${myProduct.id}`);
+      console.log(`Editing Product with ID ${myProduct.productId}`);
     } else {
       console.log("User IDs not available");
     }

@@ -1,11 +1,77 @@
-
+<div class="" style="text-align: center" class="text-center"
+*ngIf="user$ | async as user">
 <div class="container">
-    <h1>hi</h1>
-    <div *ngIf="myProduct">
+    <h1>Edit Your Product</h1>
+    <button mat-icon-button [mat-dialog-close]="false">
+        <mat-icon>close</mat-icon>
+      </button>
+    <!-- <div *ngIf="myProduct">
         <img [src]="myProduct.photoURL" style="max-height: 80px; max-width: auto">
+        <p>{{productId}}</p>
         <p>{{myProduct.userIds}}</p>
         <p>{{myProduct.productName}}</p>
         <p>{{myProduct.price}}</p>
         <p>{{myProduct.condition}}</p>
+    </div> -->
+    <div>
+        <div *ngIf="product$">
+        <div *ngFor="let product of product$ | async ">
+            <!-- {{ product | json }} -->
+            <div class="profile-image">
+                <img
+                  width="120"
+                  height="120"
+                  class="margin-top mat-elevation-z1"
+                  [src]="product.photoURL || '/assets/images/image-placeholder.png'"
+                />
+               <button mat-mini-fab (click)="inputField.click()">
+                    <mat-icon>edit</mat-icon>
+               </button>
+              </div>
+              <input #inputField type="file" hidden (change)="uploadImage($event, user, product)">
+          </div>
     </div>
+    <form class="margin-top" [formGroup]="profileForm" (ngSubmit)="saveProduct()">
+        <div class="row">
+          <mat-form-field>
+            <input
+              type="text"
+              matInput
+              formControlName="productName"
+              placeholder="Product Name"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              type="text"
+              matInput
+              formControlName="price"
+              placeholder="Price"
+            />
+          </mat-form-field>
+        </div>
+    
+        <div class="">
+          <mat-form-field>
+            <input
+              type="text"
+              matInput
+              formControlName="condition"
+              placeholder="Condition"
+            />
+          </mat-form-field>
+          
+        </div>
+        
+        <button type="submit" class="margin-top save-button" mat-raised-button color="primary" style="display: inline-block;">
+          Save
+        </button>
+        <button type="button" class="margin-top delete-button" mat-raised-button color="" style="display: inline-block;" (click)="confirmDelete()">
+            Delete Product
+          </button>
+      </form>
+     
+    
+</div>
+</div>
 </div>

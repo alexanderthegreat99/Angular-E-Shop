@@ -9,3 +9,28 @@
     position: relative; /* make the position relative for absolute positioning of maticon */
     
   }
+  .row {
+    display: flex;
+    gap: 16px;
+  }
+  button[mat-icon-button] {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .profile-image{
+    position: relative;
+  
+    
+
+}
+.profile-image > button {
+    position:absolute;
+    top: 100px;
+}
+.delete-button{
+  background-color: red;
+  margin-left: 20px;
+  color: white;
+  
+}

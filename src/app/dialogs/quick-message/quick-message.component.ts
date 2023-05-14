@@ -8,7 +8,8 @@ import { ProductsService } from 'src/app/services/products.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ChatsService } from 'src/app/services/chats.service';
 import { UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
-import { HomeComponent } from 'src/app/components/home/home.component';
+import { NgToastService } from 'ng-angular-popup';
+//import { HomeComponent } from 'src/app/components/home/home.component';
 
 
 @UntilDestroy()
@@ -29,7 +30,7 @@ export class QuickMessageComponent {
   // private subscription1: Subscription | undefined;
   // private subscription2: Subscription | undefined;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { userIds: string | undefined }, private firestore: Firestore, private productsService: ProductsService, private usersService: UsersService, private chatsService: ChatsService,) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { userIds: string | undefined }, private firestore: Firestore, private productsService: ProductsService, private usersService: UsersService, private chatsService: ChatsService, private toast: NgToastService,) {
 
   }
 
@@ -80,6 +81,12 @@ export class QuickMessageComponent {
         untilDestroyed(this)).subscribe(
         () => {
           console.log("message sent");
+          this.toast.success({detail:"SUCCESS",summary:'Message sent!', duration: 5000});
+          
+        },
+        err => {
+          console.error(err);
+          this.toast.error({detail:"ERROR",summary:'Message sending failed!', duration: 5000});
         }
       );
       this.messageControl.setValue('');
