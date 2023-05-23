@@ -13,6 +13,7 @@ import {
   redirectLoggedInTo,
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
@@ -54,6 +55,11 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductsComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'shopping-cart',
+    component: ShoppingCartComponent,
     ...canActivate(redirectUnauthorizedToLogin),
   },
 ];

@@ -7,6 +7,8 @@ import { UsersService } from 'src/app/services/users.service';
 import { UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import { delay } from 'rxjs';
 import { ProfileUser } from 'src/app/models/user';
+import { ProductsService } from 'src/app/services/products.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 @UntilDestroy()
 @Component({
   selector: 'app-landing',
@@ -15,13 +17,24 @@ import { ProfileUser } from 'src/app/models/user';
 })
 export class LandingComponent {
   users: ProfileUser[] | undefined;
-  constructor( private usersService: UsersService, private cdr: ChangeDetectorRef) {
+  allProducts$ = this.productsService.allProducts$;
+  constructor( private usersService: UsersService, private cdr: ChangeDetectorRef, private productsService:ProductsService, private shoppingCartService: ShoppingCartService) {
     console.log('constructor called');
   
-    this.usersService.currentUserProfile$.subscribe((user) => {
-      console.log('Current user:', user);
-    });
+    this.usersService.currentUserProfile$.pipe(untilDestroyed(this)).subscribe((user) => {
+      console.log('Current user:', user?.uid);
+     });
   }
+
+  // createCart(){
+
+  //   this.usersService.currentUserProfile$.pipe(untilDestroyed(this)).subscribe((user) => {
+  //     if(user){
+  //     this.shoppingCartService.createCart(user.uid)
+  //     }
+  //   });
+
+  // }
   ngOnInit() {
     this.usersService.allUsers$.pipe(untilDestroyed(this)).subscribe(
       users => {

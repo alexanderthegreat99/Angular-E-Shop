@@ -10,6 +10,7 @@
     grid-gap: 70px;
 }
 .product-container{
+    
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
     width: 200px;
@@ -50,12 +51,33 @@
     margin-left: 5px;
     margin-top: 7px;
   }
+  .darkblue1 {
+    background-color: rgb(208, 31, 131) !important;
+    margin-left: 5px;
+    margin-top: 0px;
+  }
   .darkRed {
     background-color: rgb(217, 29, 29)!important;
     margin-left: 5px;
     margin-top: 7px;
+    padding: 5px 10px;
+    height: 40px !important;
+    
   }
 .parent-container {
     display: flex;
     justify-content: center;
+}
+.edit-button {
+  margin-top: 20px;
+  background-color: rgb(217, 29, 29);
+    border: none;
+    border-radius: 0.25rem;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }

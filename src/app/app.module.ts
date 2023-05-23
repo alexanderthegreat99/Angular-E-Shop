@@ -41,6 +41,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatDialogModule } from '@angular/material/dialog';
 import { QuickMessageComponent } from './dialogs/quick-message/quick-message.component';
 import { QuickEditProductComponent } from './dialogs/quick-edit-product/quick-edit-product.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { QuickEditProductComponent } from './dialogs/quick-edit-product/quick-ed
     PostProductComponent,
     ProductsComponent,
     QuickMessageComponent,
-    QuickEditProductComponent
+    QuickEditProductComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

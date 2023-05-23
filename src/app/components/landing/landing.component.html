@@ -1,9 +1,16 @@
 <p>landing works!</p>
-<button mat-raised-button color="primary" (click)="sendMessage()">Fetch all users</button>
+<!-- <button mat-raised-button color="primary" (click)="sendMessage()">Fetch all users</button> -->
+<button mat-raised-button color="primary">createCart</button>
 <!-- <button mat-raised-button color="primary" (click)="test()">trigger change detection</button> -->
-<div *ngIf="users">
+<!-- <div *ngIf="users">
     <p>Users UIDs:</p>
     <ul>
       <li *ngFor="let user of users">{{ user.uid }}</li>
     </ul>
-  </div>
+  </div> -->
+
+  <!-- <div  *ngIf="allProducts$ | async as allProducts" style="width: 500px">
+    <div  *ngFor="let product of allProducts$ | async ">
+        {{product| json}}
+    </div>
+</div> -->

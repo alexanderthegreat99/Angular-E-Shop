@@ -12,3 +12,6 @@ export interface Product {
   condition: string;
   userIds?: string;
 }
+export interface ProductQ extends Product {
+  quantity: number;
+}

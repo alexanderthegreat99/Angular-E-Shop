@@ -12,12 +12,21 @@
                 </div>
             </div>
             <div class="product-buttons">
-                <button class="btn-primary"> add to cart</button>
                 <div  *ngIf="user$ | async as currentUser">
+                    <div  *ngFor="let cartItems of getMyCart$ | async ">
+                <button class="btn-primary" *ngIf="currentUser.uid != p.userIds && !(isProductInCart(p.productId));else viewItemInCart" (click)="addToCart(currentUser.uid, p.productId, cartItems.id)"> add to cart</button>
+            </div>
                 <button class="darkblue btn-primary" *ngIf="currentUser.uid != p.userIds; else notifyme" (click)="messageSeller(p.userIds)">message user</button>
                 <ng-template #notifyme>
-                    <button class="darkRed btn-primary" (click)="quickEditProduct(p)">Edit My Product</button>
+                    <button class="edit-button" [ngClass]="{ 'margin-fix': currentUser.uid != p.userIds }"(click)="quickEditProduct(p)">Edit My Product</button>
                 </ng-template>
+                
+                <ng-template #viewItemInCart >
+                    <div *ngIf="currentUser.uid != p.userIds">
+                    <button class="btn-primary  darkblue1" routerLink="/shopping-cart">View Item In cart</button>
+                    </div>
+                </ng-template>
+            
             </div>
             </div>
             
@@ -27,5 +36,9 @@
 <div class="parent-container ">
     <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
   </div>
-
+<!-- <div  *ngIf="getMyCart$ | async as getMyCart" style="width: 500px">
+    <div  *ngFor="let fullCart of getMyCart$ | async ">
+        {{fullCart.products| json}}
+    </div>
+</div> -->
   <!-- *ngIf="currentUser.uid != p.userIds; else notifyme" -->

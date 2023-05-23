@@ -1,0 +1,123 @@
+<div class="title">
+    <h1>Shopping Cart</h1> 
+  </div>
+  
+<div class="container">
+    <div class="left-column">
+        <!-- <div class="product-container">
+            <div class="product-header">
+                <h2>Seller: Darren Perez</h2>
+            </div>
+            <div class="product-details">
+                <img src="https://firebasestorage.googleapis.com/v0/b/angular-chat-app-dcde8.appspot.com/o/images%2Fproducts%2FQmpWhqHtaVS6SQZFYCHM62bTVHD2%2F1683144355887_legostarwarsmillenniumfalcon.jpg?alt=media&token=0faefe0f-a001-4fc8-b453-b5f737ea46a2" class="product-img">
+                <div class="product-labels"><label>LEGO Star Wars Ultimate Millennium Falcon 75192</label> <br> <div style="margin-top: 8px;"><b>New</b></div></div>
+                <div class="product-quantity">
+                    <h2>Quantity: </h2>
+                    <select id="quantityDropdown">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                </div>
+                <div class="product-price"> <h2>$129.99</h2></div>
+            </div>
+            <div class="product-foot">
+                <button class="darkRed btn-primary remove-button">Remove</button>
+            </div>
+
+
+        </div> -->
+        <!-- <div class="product-container">
+            <div class="product-header">
+                <h2>Seller: Darren Perez</h2>
+            </div>
+            <div class="product-details">
+                <div class="image-div"  style="width: 155px; display: flex; align-items: center; justify-content: center;">
+                <img src="https://firebasestorage.googleapis.com/v0/b/angular-chat-app-dcde8.appspot.com/o/images%2Fproducts%2FtW0hge0j6XfGQnSQeW2Kz1eKpxB3%2F1683227445676_chronosgamingpc.jpg?alt=media&token=2f676d70-bdc1-49fd-9626-40c3ae488a7a" class="product-img" >
+                </div>      
+                <div class="product-labels"><label>LEGO Star Wars Ultimate Millennium Falcon 75192</label> <br> <div style="margin-top: 8px;"><b>New</b></div></div>
+                <div class="product-quantity">
+                    <h2>Quantity: </h2>
+                    <select id="quantityDropdown">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                </div>
+                <div class="product-price"> <h2>$129.99</h2></div>
+            </div>
+            
+                <button class="darkRed btn-primary remove-button3">Remove</button>
+            
+
+           
+        </div> -->
+        <div  *ngIf="(combinedStreamNew$) as combinedStream">
+            <div  *ngFor="let combinedStreamy of combinedStream | async  ">
+                <div  >
+
+            <!-- <h1>{{combinedStreamy.products| json}}</h1> -->
+           
+            <!-- <h1>{{ combinedStreamy.products[0].product | json }}</h1>
+            <h1>{{ combinedStreamy.products[1].product | json }}</h1>
+            <h1>{{ combinedStreamy.products[2].product | json }}</h1> -->
+            <div *ngFor="let product of combinedStreamy.products">
+                <!-- <h1>{{ product.product?.productId | json }}</h1>
+                <h1>{{ product.product?.price | json }}</h1>
+                <h1>{{ product.product?.condition | json }}</h1>
+                <h1>{{ product.product?.photoURL | json }}</h1>-->
+                <!-- <h1>{{ product.quantity | json }}</h1>  -->
+                <div class="product-container">
+                    <div class="product-header">
+                        <h2>Seller: Darren Perez</h2>
+                    </div>
+                    <div class="product-details">
+                        <div class="image-div"  style="width: 155px; display: flex; align-items: center; justify-content: center;">
+                        <img [src]="product.product?.photoURL" class="product-img">
+                        </div>
+                        <div class="product-labels"><label>{{product.product?.productName}}</label> <br> <div style="margin-top: 8px;"><b>{{ product.product?.condition}}</b></div></div>
+                        <div class="product-quantity">
+                            <h2>Quantity: </h2>
+                            <select id="quantityDropdown" [value]="product.quantity" (change)="updateQuantity(product.product?.productId,$event)">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                        </div>
+                        <div class="product-price"> <h2>{{ product.product?.price}}</h2></div>
+                    </div>
+                    
+                        <button class="darkRed remove-button3" (click)="removeItem(product.product!.productId)">Remove</button>
+                    
+        
+        
+                </div>
+
+              </div>
+            </div>
+        </div>
+        </div>
+        <!-- <div>{{userCartNew.length|json}}</div>
+        <div>{{userCartNew|json}}</div> -->
+    </div>
+    <div class="right-column">
+        <div>
+            <button class="checkout-button btn-primary">Proceed to Checkout</button>
+            <div class="checkout-table">
+                <div class="cart-summary-line"> <p class="left-checkout">Items({{productWithDetailsLength}}) </p> <p class="right-checkout">${{(TotalCost).toFixed(2)}}</p> </div>
+                <div class="cart-summary-line">  <p class="left-checkout">Shipping Cost </p> <p class="right-checkout">$19.99</p> </div>
+                
+                <div class="line-x">  </div>
+                <div class="cart-summary-line final-line">  <p class="left-checkout"  style="font-size: 20px;"> <b>Subtotal</b> </p> <p class="right-checkout" style="font-size: 20px;"><b>${{(TotalCost + 19.99).toFixed(2)}}</b></p> </div>
+            </div>
+        </div>
+        
+    
+    </div>
+</div>

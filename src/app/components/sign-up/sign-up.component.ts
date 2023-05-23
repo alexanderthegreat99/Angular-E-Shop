@@ -12,10 +12,10 @@ import { PasswordValidators } from 'src/app/validators/validator';
 import { NgToastService } from 'ng-angular-popup';
 
 import { Router } from '@angular/router';
-import { switchMap} from 'rxjs';
+import { switchMap, tap} from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
 import { user } from '@angular/fire/auth';
-
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -44,7 +44,7 @@ export class SignUpComponent {
     confirmPassword: new FormControl(null, Validators.required),
   }, { validators: passwordsMatchValidator()})
 
-  constructor(private authService: AuthenticationService, private router: Router, private toast: NgToastService,  private usersService: UsersService,){}
+  constructor(private authService: AuthenticationService, private router: Router, private toast: NgToastService,  private usersService: UsersService, private shoppingCartService: ShoppingCartService){}
   passwordsMinLength(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const password = control.get('password')?.value;
@@ -87,6 +87,8 @@ export class SignUpComponent {
     console.log(user);
     this.authService
     .signUp(email, password).pipe(
+      //tap(({user: { uid} }) => console.log("uid in signup: ",uid)),
+      tap(({user }) => this.shoppingCartService.createCart(user.uid)),
       switchMap(({user: { uid}})=> this.usersService.addUser({uid, email, displayName: name}))
     )
   

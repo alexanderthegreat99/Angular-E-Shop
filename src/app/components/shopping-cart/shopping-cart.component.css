@@ -1,0 +1,227 @@
+.container{
+  
+    width:93%;
+    margin: 0 auto; 
+    height: auto;
+   
+    display:flex;
+   
+}
+.title {
+    width: 93%;
+    margin: 0 auto; 
+    text-align: center;
+    background-color: green;
+    margin-bottom: 10px;
+
+    
+  }
+  .title h1 {
+    margin: 0;
+    font-size: 36px;
+    background-color: white;
+    
+  }
+.left-column {
+    background-color: white !important;
+    width: 67%;
+    height: 1200px;
+    border: 1px solid white;
+}
+.product-container{
+   position: relative;
+    background-color: white !important;
+    width: 99%;
+    height: 211px;
+    border: 1px solid #cdc7c7;
+    margin-bottom: 20px;
+}
+.right-column {
+    position: sticky;
+    top: 20px;
+    width: 28%;
+    display:flex;
+    justify-content: center;
+    height: 220px;
+    margin-left: 4%;
+    background-color: white !important;
+    border: 1px solid #cdc7c7;
+}
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 0.25rem;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    margin: 10px;
+  }
+  .btn-primary:hover {
+    background-color: #528dcd;
+    color: #fff;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  }
+  .btn-primary:hover {
+    
+    color: #fff;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  }
+  .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+  .product-header{
+    border: 1px solid #cdc7c7;
+    height: 50px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  .product-header h2{
+    margin-left: 10px;
+  }
+  .product-details{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; 
+  }
+  .product-img{
+    padding: 0px 16px 0px 16px;
+    max-width: 123px;
+    max-height: 100px;
+
+  }
+  .product-labels{
+    width:260px;
+    padding: 0px 16px 0px 0px;
+  }
+  .product-labels label {
+    font-family: 'Market Sans', sans-serif;
+    font-size: 14px;
+    text-decoration: underline;
+  }
+  .product-quantity{
+    width:180px;
+    display: flex;
+    align-items: center;
+  }
+  .product-quantity h2{
+    max-width: 100px;
+    margin-right: 10px;
+  }
+  .product-quantity select {
+    font-size: 18px;
+    padding: 7px;
+   
+  }
+  .product-price{
+    width:145px;
+  }
+  .product-price h2{
+    text-align: right;
+  }
+  .product-foot {
+    
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 50px;
+    
+}
+.remove-button {
+  
+    position: absolute;
+    background-color: #d9534f;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0px 20px 20px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    
+    
+    
+}
+.remove-button3{
+  position: absolute;
+  background-color: #d9534f;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  bottom: 10px;
+  cursor: pointer;
+    font-size: 16px;
+    border: none;
+  right: 10px;
+  margin: 0;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  
+}
+
+
+.remove-button3:hover {
+    background-color: #d5736f;
+    color: #fff;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+}
+.remove-button3:focus {
+  box-shadow: 0 0 0 0.2rem rgba(203, 22, 22, 0.5);
+  outline: none;
+}
+.checkout-button{
+    background-color: #007bff;
+    border: none;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 23px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    margin: 10px;
+    height: 23.5px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.checkout-table{
+    margin-top: 16px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.cart-summary-line{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    width: 100%;
+}
+.left-checkout{
+    text-align: left;
+    margin: 0;
+    
+}
+  
+.right-checkout{
+    text-align: right;
+    margin: 0;
+}
+.line-x {
+    height: 4px;
+    width: 95%;
+    border-bottom: 1px solid black;
+    margin: 10px auto;
+    
+    
+  }
